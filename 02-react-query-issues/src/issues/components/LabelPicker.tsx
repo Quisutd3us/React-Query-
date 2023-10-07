@@ -1,17 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { githubAPI } from "../../API/githubAPI";
-import { Label } from "../interfaces/label";
+import { useLabel } from "../../hooks/useLabel";
 
-const getLabelsAPI = async (): Promise<Label[]> => {
-  const { data } = await githubAPI.get<Label[]>("/labels");
-  return data;
-};
 
 export const LabelPicker = () => {
-  const labelsQuery = useQuery(["labels"], getLabelsAPI, {
-    refetchOnWindowFocus: true,
-  });
-
+  const labels = useLabel();
   return (
     <>
       <span

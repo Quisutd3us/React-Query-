@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { FiCheckCircle, FiInfo, FiMessageSquare } from 'react-icons/fi';
 
 import { Issue,State } from '../interfaces';
-import { getissueAPI } from '../../hooks/useIssue';
+import { getcommentsAPI, getissueAPI } from '../../hooks/useIssue';
 interface Props{
     issue:Issue
 }
@@ -16,9 +16,12 @@ export const IssueItem:FC<Props> = ({issue}) => {
     const navigate =useNavigate();
     const queryCliet =useQueryClient();
 
-    const mouseEnter =()=>{
-      queryCliet.prefetchQuery(["issue", issue.number], () =>
+    const mouseEnter =  () => {
+       queryCliet.prefetchQuery(["issue", issue.number], () =>
         getissueAPI(issue.number)
+      );
+       queryCliet.prefetchQuery(["issue", issue.number, "comments"], () =>
+        getcommentsAPI(issue.number)
       );
     };
 

@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 *.txt
+githubAPI.ts
 
 # Editor directories and files
 .vscode/*

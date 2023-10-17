@@ -20,16 +20,17 @@ export const IssueView = () => {
         <Link to="./issues/list">Go Back</Link>
       </div>
 
-        <IssueComment issue={issueQuery.data}/>
-
-        {
-          commentsQuery.data?.map((issue)=>(
-            <IssueComment 
+      <IssueComment issue={issueQuery.data} />
+      {commentsQuery.isLoading ? (
+        <LoadingIcon />
+      ) : (
+        commentsQuery.data?.map((issue) => (
+          <IssueComment
             key={issue.id}
-            issue ={issue} />
-          ))
-        }
-  
+            issue={issue}
+          />
+        ))
+      )}
     </div>
   );
 }

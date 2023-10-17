@@ -19,21 +19,20 @@ export const IssueView = () => {
       <div className="col-12 mb-3">
         <Link to="./issues/list">Go Back</Link>
       </div>
-      <div className='d-flex flex-column gap-3'>
+      <div className="d-flex flex-column gap-3">
+        <IssueComment issue={issueQuery.data} />
 
-      <IssueComment issue={issueQuery.data} />
-
-      {commentsQuery.isLoading ? (
-        <LoadingIcon  />
-      ) : (
-        commentsQuery.data?.map((issue) => (
-          <IssueComment
-            key={issue.id}
-            issue={issue}
-          />
-        ))
-      )}
+        {commentsQuery.isLoading ? (
+          <LoadingIcon />
+        ) : (
+          commentsQuery.data?.map((issue) => (
+            <IssueComment
+              key={issue.id}
+              issue={issue}
+            />
+          ))
+        )}
       </div>
-      </div>
+    </div>
   );
 }

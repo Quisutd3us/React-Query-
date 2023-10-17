@@ -1,9 +1,11 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { FiCheckCircle, FiInfo, FiMessageSquare } from 'react-icons/fi';
 
 import { Issue,State } from '../interfaces';
+import { getissueAPI } from '../../hooks/useIssue';
 interface Props{
     issue:Issue
 }
@@ -12,10 +14,18 @@ interface Props{
 export const IssueItem:FC<Props> = ({issue}) => {
     const {title,number,user,state,comments} = issue;
     const navigate =useNavigate();
+    const queryCliet =useQueryClient();
+
+    const mouseEnter =()=>{
+      queryCliet.prefetchQuery(["issue", issue.number], () =>
+        getissueAPI(issue.number)
+      );
+    };
 
     return (
       <div className="card mb-2 issue"
       onClick={()=>navigate(`/issues/issue/${number}`)}
+      onMouseEnter={mouseEnter}
       >
         <div className="card-body d-flex align-items-center">
           {state === State.Open ? (

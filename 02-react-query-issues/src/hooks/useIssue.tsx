@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { githubAPI } from '../API/githubAPI';
+import { githubAPI } from "../API/githubAPI";
+
 import { Issue } from "../issues/interfaces";
 import { sleep } from "../helpers/sleep";
 
-const getissueAPI = async (issueId: number): Promise<Issue> => {
+export const getissueAPI = async (issueId: number): Promise<Issue> => {
   await sleep(2);
   const { data } = await githubAPI.get<Issue>(`/issues/${issueId}`);
   return data;
 };
 
-const getcommentsAPI = async(issueId: number):Promise<Issue[]>=>{
+export const getcommentsAPI = async(issueId: number):Promise<Issue[]>=>{
   await sleep(2);
   const {data} = await githubAPI.get<Issue []>(`/issues/${issueId}/comments`);
   return data

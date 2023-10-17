@@ -20,8 +20,13 @@ export const useIssue =(issueNumber:number)=>{
     const issueQuery = useQuery(["issue", issueNumber], () =>
       getissueAPI(issueNumber)
     );
-    const commentsQuery = useQuery(["issues", issueNumber, "comments"], () =>
-      getcommentsAPI(issueNumber)
+    const commentsQuery = useQuery(
+      ["issues", issueNumber, "comments"], 
+      () =>
+      getcommentsAPI(issueNumber),
+      {
+        enabled: issueQuery.data !== undefined,
+      }
     );
     return { issueQuery, commentsQuery };
 }

@@ -12,8 +12,9 @@ import { State } from '../interfaces';
 export const ListView = () => {
 
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
+  // manage Open Closed issues 
   const [state, setState] = useState<State>();
-  const {issuesQuery} = useIssues();
+  const {issuesQuery} = useIssues({state:state,labels:selectedLabels});
 
   const onChangeLabels =(labelName:string)=>{
    

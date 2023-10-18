@@ -32,6 +32,7 @@ export const ListView = () => {
             issues={issuesQuery.data || []}
             state={state}
             onStateChanged={(newState)=>setState(newState)}
+            selectedLabels={selectedLabels || []}
         />}
       </div>
 

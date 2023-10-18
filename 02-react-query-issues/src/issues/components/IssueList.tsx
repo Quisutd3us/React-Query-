@@ -8,9 +8,10 @@ interface Props {
   issues: Issue[];
   state?: State;
   onStateChanged: (state?: State) => void;
+  selectedLabels?:string[]
 }
 
-export const IssueList:FC<Props> = ({issues,state,onStateChanged}) => {
+export const IssueList:FC<Props> = ({issues,state,onStateChanged,selectedLabels}) => {
     return (
       <div className="card border-white">
         <div className="card-header bg-dark">
@@ -48,6 +49,7 @@ export const IssueList:FC<Props> = ({issues,state,onStateChanged}) => {
               issue={issue}
             />
           ))}
+          
         </div>
       </div>
     );

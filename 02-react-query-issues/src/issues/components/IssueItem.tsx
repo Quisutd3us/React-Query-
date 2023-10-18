@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const IssueItem: FC<Props> = ({ issue }) => {
-  const { title, number, user, state, comments } = issue;
+  const { title, number, user, state, comments,labels } = issue;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -68,6 +68,20 @@ export const IssueItem: FC<Props> = ({ issue }) => {
           <span className="px-2">{comments}</span>
           <FiMessageSquare />
         </div>
+      </div>
+      <div className="card-body d-flex flex-row justify-left gap-2 bg-dark p-2">
+        {labels.map((label) => (
+          <span
+            key={label.id}
+            className="badge rounded-pill"
+            style={{
+              border: `1px solid #${label.color}`,
+              color: `#${label.color}`,
+            }}
+          >
+            {label.name}
+          </span>
+        ))}
       </div>
     </div>
   );

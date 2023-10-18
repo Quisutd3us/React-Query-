@@ -69,7 +69,7 @@ export const IssueItem: FC<Props> = ({ issue }) => {
           <FiMessageSquare />
         </div>
       </div>
-      <div className="card-body d-flex flex-row justify-left gap-2 bg-dark p-2">
+      <div className="card-body d-flex flex-row  gap-2 p-2 bg-black">
         {labels.map((label) => (
           <span
             key={label.id}

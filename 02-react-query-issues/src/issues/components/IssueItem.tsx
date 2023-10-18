@@ -15,6 +15,8 @@ export const IssueItem: FC<Props> = ({ issue }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  // preFetchData hace el llamado http una vez se dispara el evento 
+
   const preFetchData = () => {
     queryClient.prefetchQuery(["issue", issue.number], () =>
       getissueAPI(issue.number)
@@ -24,6 +26,7 @@ export const IssueItem: FC<Props> = ({ issue }) => {
     );
   };
 
+  // setQueryData me carga la info en el cache sin llamados http solo cuando realmente se pide hace un llamado para ver si esta actualizado
   const preSetData = () => {
     queryClient.setQueryData(["issue", issue.number], issue);
   };

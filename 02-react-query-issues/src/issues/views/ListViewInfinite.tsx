@@ -10,7 +10,7 @@ import { useIssues } from '../../hooks';
 import { State } from '../interfaces';
 
 
-export const ListView = () => {
+export const ListViewInfinite = () => {
 
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   // manage Open Closed issues 
@@ -36,33 +36,10 @@ export const ListView = () => {
             onStateChanged={(newState) => setState(newState)}
           />
         )}
-        {/* grid for pagination Buttons */}
+        {/* Grif for Infinite Scroll Pagination */}
         <div className="row">
-          <div className="col-12 mt-2 d-flex justify-content-center gap-2">
-            <button
-              type="button"
-              className="btn btn-primary"
-              disabled={issuesQuery.isFetching}
-              onClick={() => previousPage()}
-            >
-              <FiChevronLeft size={"30"} />
-              Prev
-            </button>
-            <span
-              className={"d-flex justify-content-center align-items-center"}
-              style={{ border: "solid 1px", width: "max-content" ,padding:'5px'}}
-            >
-              {page}
-            </span>
-            <button
-              type="button"
-              className="btn btn-primary"
-              disabled={issuesQuery.isFetching}
-              onClick={() => nextPage()}
-            >
-              Next
-              <FiChevronRight size={"30"} />
-            </button>
+          <div className="col-12 mt-2 d-flex justify-content-left align-items-center">
+            <button className='btn btn-primary'>Load More + </button>
           </div>
         </div>
       </div>

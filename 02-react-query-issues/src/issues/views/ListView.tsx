@@ -15,7 +15,7 @@ export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   // manage Open Closed issues 
   const [state, setState] = useState<State>();
-  const {issuesQuery} = useIssues({state:state,labels:selectedLabels});
+  const {issuesQuery,page,nextPage,previousPage} = useIssues({state:state,labels:selectedLabels});
 
   const onChangeLabels =(labelName:string)=>{
    
@@ -42,16 +42,23 @@ export const ListView = () => {
             <button
               type="button"
               className="btn btn-primary"
+              disabled={issuesQuery.isLoading}
+              onClick={() => previousPage()}
             >
               <FiChevronLeft size={"30"} />
               Prev
             </button>
             <span
-            className={'d-flex justify-content-center align-items-center'}
-            style={{ border: "solid 1px", width: "30px" }}>1</span>
+              className={"d-flex justify-content-center align-items-center"}
+              style={{ border: "solid 1px", width: "30px" }}
+            >
+              {page}
+            </span>
             <button
               type="button"
               className="btn btn-primary"
+              disabled={issuesQuery.isLoading}
+              onClick={() => nextPage()}
             >
               Next
               <FiChevronRight size={"30"} />

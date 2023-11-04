@@ -42,7 +42,7 @@ export const ListView = () => {
             <button
               type="button"
               className="btn btn-primary"
-              disabled={issuesQuery.isLoading}
+              disabled={issuesQuery.isFetching}
               onClick={() => previousPage()}
             >
               <FiChevronLeft size={"30"} />
@@ -50,14 +50,14 @@ export const ListView = () => {
             </button>
             <span
               className={"d-flex justify-content-center align-items-center"}
-              style={{ border: "solid 1px", width: "30px" }}
+              style={{ border: "solid 1px", width: "max-content" ,padding:'5px'}}
             >
               {page}
             </span>
             <button
               type="button"
               className="btn btn-primary"
-              disabled={issuesQuery.isLoading}
+              disabled={issuesQuery.isFetching}
               onClick={() => nextPage()}
             >
               Next

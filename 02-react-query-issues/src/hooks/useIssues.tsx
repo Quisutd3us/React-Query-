@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+
 import { useQuery } from "@tanstack/react-query";
 
 import { githubAPI } from "../API/githubAPI";
 
 import { Issue, State } from "../issues/interfaces";
 import { sleep } from "../helpers/sleep";
-import { useState } from "react";
 
 interface Props {
   labels: string[];
@@ -32,6 +33,13 @@ const getIssuesAPI = async ({
 
 export const useIssues = ({ labels, state }: Props) => {
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPage(1);
+   
+  }, [state, labels])
+  
+
   const issuesQuery = useQuery(["issues", { labels, state }, page], () =>
     getIssuesAPI({ labels, state, page })
   );
@@ -49,7 +57,8 @@ export const useIssues = ({ labels, state }: Props) => {
   return {
     //properties
     issuesQuery,
-    page,
+    // getter
+    page: issuesQuery.isFetching ? "Loading" : page,
     //methods
     nextPage,
     previousPage,

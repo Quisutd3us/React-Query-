@@ -6,12 +6,16 @@ import { FiCheckCircle, FiInfo, FiMessageSquare } from "react-icons/fi";
 
 import { Issue, State } from "../interfaces";
 import { getcommentsAPI, getissueAPI } from "../../hooks/useIssue";
+import { timeSince } from "../../helpers/timeSince";
+
+
+
 interface Props {
   issue: Issue;
 }
 
 export const IssueItem: FC<Props> = ({ issue }) => {
-  const { title, number, user, state, comments,labels } = issue;
+  const { title, number, user, state, comments,labels,created_at } = issue;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -54,7 +58,7 @@ export const IssueItem: FC<Props> = ({ issue }) => {
         <div className="d-flex flex-column flex-fill px-2">
           <span>{title}</span>
           <span className="issue-subinfo">
-            {`#${number} opened 2 days ago by `}
+            {`#${number} opened ${timeSince(created_at)}  ago by `}
             <span className="fw-bold">{user.login}</span>
           </span>
         </div>

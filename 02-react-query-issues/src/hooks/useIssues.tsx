@@ -22,7 +22,6 @@ const getIssuesAPI = async (
   }
   params.append('page','1');
   params.append('per_page','5');
-
   sleep(2);
   const { data } = await githubAPI.get<Issue[]>("/issues", { params });
   return data;

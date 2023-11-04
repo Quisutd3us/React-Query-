@@ -4,6 +4,7 @@ import { LoadingIcon } from '../../shared/components/LoadingIcon';
 
 import { IssueList } from '../components/IssueList';
 import { LabelPicker } from '../components/LabelPicker';
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 import { useIssues } from '../../hooks';
 import { State } from '../interfaces';
@@ -26,14 +27,37 @@ export const ListView = () => {
   return (
     <div className="row mt-5">
       <div className="col-8">
-        {issuesQuery.isLoading 
-        ? <LoadingIcon /> 
-        : <IssueList 
+        {issuesQuery.isLoading ? (
+          <LoadingIcon />
+        ) : (
+          <IssueList
             issues={issuesQuery.data || []}
             state={state}
-            onStateChanged={(newState)=>setState(newState)}
-            selectedLabels={selectedLabels || []}
-        />}
+            onStateChanged={(newState) => setState(newState)}
+          />
+        )}
+        {/* grid for pagination Buttons */}
+        <div className="row">
+          <div className="col-12 mt-2 d-flex justify-content-center gap-2">
+            <button
+              type="button"
+              className="btn btn-primary"
+            >
+              <FiChevronLeft size={"30"} />
+              Prev
+            </button>
+            <span
+            className={'d-flex justify-content-center align-items-center'}
+            style={{ border: "solid 1px", width: "30px" }}>1</span>
+            <button
+              type="button"
+              className="btn btn-primary"
+            >
+              Next
+              <FiChevronRight size={"30"} />
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="col-4">

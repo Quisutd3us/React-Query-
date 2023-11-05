@@ -42,12 +42,12 @@ export const IssueList:FC<Props> = ({issues,state,onStateChanged}) => {
           </ul>
         </div>
         <div className="card-body text-dark">
-          {issues.map((issue) => (
+          {issues?.map((issue) => (
             <IssueItem
               key={issue.id}
               issue={issue}
             />
-          ))}
+          )) || []}
           
         </div>
       </div>

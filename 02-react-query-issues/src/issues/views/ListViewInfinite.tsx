@@ -4,10 +4,9 @@ import { LoadingIcon } from '../../shared/components/LoadingIcon';
 
 import { IssueList } from '../components/IssueList';
 import { LabelPicker } from '../components/LabelPicker';
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-import { useIssues } from '../../hooks';
 import { State } from '../interfaces';
+import { useIssuesInfinity } from '../../hooks';
 
 
 export const ListViewInfinite = () => {
@@ -15,8 +14,7 @@ export const ListViewInfinite = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   // manage Open Closed issues 
   const [state, setState] = useState<State>();
-  const {issuesQuery,page,nextPage,previousPage} = useIssues({state:state,labels:selectedLabels});
-
+  const {issuesQuery} = useIssuesInfinity({state:state,labels:selectedLabels});
   const onChangeLabels =(labelName:string)=>{
    
     selectedLabels.includes(labelName)
@@ -31,15 +29,21 @@ export const ListViewInfinite = () => {
           <LoadingIcon />
         ) : (
           <IssueList
-            issues={issuesQuery.data || []}
+            issues={issuesQuery.data?.pages.flat() || []}
             state={state}
             onStateChanged={(newState) => setState(newState)}
           />
         )}
-        {/* Grif for Infinite Scroll Pagination */}
+        {/* Grid for Infinite Scroll Pagination */}
         <div className="row">
           <div className="col-12 mt-2 d-flex justify-content-left align-items-center">
-            <button className='btn btn-primary'>Load More + </button>
+            <button
+              disabled={!issuesQuery.hasNextPage}
+              className="btn btn-primary"
+              onClick={() => issuesQuery.fetchNextPage()}
+            >
+              Load More +{" "}
+            </button>
           </div>
         </div>
       </div>
